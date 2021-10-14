@@ -9,11 +9,25 @@ import numpy as np
 
 
 def split_data(x, y, ratio, seed=1):
-    """split the dataset based on the split ratio."""
+    """
+    split the dataset based on the split ratio. If ratio is 0.8 
+    you will have 80% of your data set dedicated to training 
+    and the rest dedicated to testing
+    """
     # set seed
     np.random.seed(seed)
+    num_row = len(y)
+    indices = np.random.permutation(num_row)
+    index_split = int(np.floor(ratio * num_row))
+    index_tr = indices[: index_split]
+    index_te = indices[index_split:]
+    x_tr = x[index_tr]
+    x_te = x[index_te]
+    y_tr = y[index_tr]
+    y_te = y[index_te]
+    
     # ***************************************************
     # INSERT YOUR CODE HERE
     # split the data based on the given ratio: TODO
-    # ***************************************************
-    raise NotImplementedError
+    # **************************************************
+    return x_tr, x_te, y_tr, y_te
